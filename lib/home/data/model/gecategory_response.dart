@@ -1,214 +1,191 @@
-class GetCategoriesResponse {
+class CategoryResponse {
   List<Categories>? categories;
   String? count;
 
-  GetCategoriesResponse({this.categories, this.count});
+  CategoryResponse({this.categories, this.count});
 
-  GetCategoriesResponse.fromJson(Map<String, dynamic> json) {
+  CategoryResponse.fromJson(Map<String, dynamic> json) {
     if (json['categories'] != null) {
       categories = <Categories>[];
       json['categories'].forEach((v) {
-        categories!.add(Categories.fromJson(v));
+        categories!.add(new Categories.fromJson(v));
       });
     }
     count = json['count'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    if (categories != null) {
-      data['categories'] = categories!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.categories != null) {
+      data['categories'] = this.categories!.map((v) => v.toJson()).toList();
     }
-    data['count'] = count;
+    data['count'] = this.count;
     return data;
   }
 }
 
 class Categories {
   String? id;
+  String? name;
   String? slug;
   String? parentId;
+  String? description;
+  List<ChildCategories>? childCategories;
   String? image;
-  Description? description;
-  Description? title;
   String? orderNo;
-  bool? active;
-  List<Products>? products;
+  List<Null>? products;
+  Title? title;
+  Title? descriptionV2;
 
   Categories(
       {this.id,
+        this.name,
         this.slug,
         this.parentId,
-        this.image,
         this.description,
-        this.title,
+        this.childCategories,
+        this.image,
         this.orderNo,
-        this.active,
-        this.products});
+        this.products,
+        this.title,
+        this.descriptionV2});
 
   Categories.fromJson(Map<String, dynamic> json) {
     id = json['id'];
+    name = json['name'];
     slug = json['slug'];
     parentId = json['parent_id'];
-    image = json['image'];
-    description = json['description'] != null
-        ? Description.fromJson(json['description'])
-        : null;
-    title =
-    json['title'] != null ? Description.fromJson(json['title']) : null;
-    orderNo = json['order_no'];
-    active = json['active'];
-    if (json['products'] != null) {
-      products = <Products>[];
-      json['products'].forEach((v) {
-        products!.add(Products.fromJson(v));
+    description = json['description'];
+    if (json['child_categories'] != null) {
+      childCategories = <ChildCategories>[];
+      json['child_categories'].forEach((v) {
+        childCategories!.add(new ChildCategories.fromJson(v));
       });
     }
+    image = json['image'];
+    orderNo = json['order_no'];
+    if (json['products'] != null) {
+      products = <Null>[];
+      json['products'].forEach((v) {
+
+      });
+    }
+    title = json['title'] != null ? new Title.fromJson(json['title']) : null;
+    descriptionV2 = json['description_v2'] != null
+        ? new Title.fromJson(json['description_v2'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['slug'] = slug;
-    data['parent_id'] = parentId;
-    data['image'] = image;
-    if (description != null) {
-      data['description'] = description!.toJson();
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    data['slug'] = this.slug;
+    data['parent_id'] = this.parentId;
+    data['description'] = this.description;
+    if (this.childCategories != null) {
+      data['child_categories'] =
+          this.childCategories!.map((v) => v.toJson()).toList();
     }
-    if (title != null) {
-      data['title'] = title!.toJson();
+    data['image'] = this.image;
+    data['order_no'] = this.orderNo;
+    if (this.products != null) {
+
     }
-    data['order_no'] = orderNo;
-    data['active'] = active;
-    if (products != null) {
-      data['products'] = products!.map((v) => v.toJson()).toList();
+    if (this.title != null) {
+      data['title'] = this.title!.toJson();
+    }
+    if (this.descriptionV2 != null) {
+      data['description_v2'] = this.descriptionV2!.toJson();
     }
     return data;
   }
 }
 
-class Description {
+class ChildCategories {
+  String? id;
+  String? name;
+  String? slug;
+  String? parentId;
+  String? description;
+  String? image;
+  String? orderNo;
+  List<Null>? products;
+  Title? title;
+  Title? descriptionV2;
+
+  ChildCategories(
+      {this.id,
+        this.name,
+        this.slug,
+        this.parentId,
+        this.description,
+        this.image,
+        this.orderNo,
+        this.products,
+        this.title,
+        this.descriptionV2});
+
+  ChildCategories.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    slug = json['slug'];
+    parentId = json['parent_id'];
+    description = json['description'];
+    image = json['image'];
+    orderNo = json['order_no'];
+    if (json['products'] != null) {
+      products = <Null>[];
+      json['products'].forEach((v) {
+
+      });
+    }
+    title = json['title'] != null ? new Title.fromJson(json['title']) : null;
+    descriptionV2 = json['description_v2'] != null
+        ? new Title.fromJson(json['description_v2'])
+        : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    data['slug'] = this.slug;
+    data['parent_id'] = this.parentId;
+    data['description'] = this.description;
+    data['image'] = this.image;
+    data['order_no'] = this.orderNo;
+    if (this.products != null) {
+
+    }
+    if (this.title != null) {
+      data['title'] = this.title!.toJson();
+    }
+    if (this.descriptionV2 != null) {
+      data['description_v2'] = this.descriptionV2!.toJson();
+    }
+    return data;
+  }
+}
+
+class Title {
   String? uz;
   String? ru;
   String? en;
 
-  Description({this.uz, this.ru, this.en});
+  Title({this.uz, this.ru, this.en});
 
-  Description.fromJson(Map<String, dynamic> json) {
+  Title.fromJson(Map<String, dynamic> json) {
     uz = json['uz'];
     ru = json['ru'];
     en = json['en'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['uz'] = uz;
-    data['ru'] = ru;
-    data['en'] = en;
-    return data;
-  }
-}
-
-class Products {
-  String? id;
-  int? outPrice;
-  String? currency;
-  String? string;
-  String? type;
-  List<String>? categories;
-  String? brandId;
-  String? rateId;
-  String? image;
-  bool? activeInMenu;
-  bool? hasModifier;
-  String? fromTime;
-  String? toTime;
-  bool? offAlways;
-  Null? gallery;
-  Description? title;
-  Description? description;
-  bool? active;
-  String? iikoId;
-  String? jowiId;
-  Null? discounts;
-
-  Products(
-      {this.id,
-        this.outPrice,
-        this.currency,
-        this.string,
-        this.type,
-        this.categories,
-        this.brandId,
-        this.rateId,
-        this.image,
-        this.activeInMenu,
-        this.hasModifier,
-        this.fromTime,
-        this.toTime,
-        this.offAlways,
-        this.gallery,
-        this.title,
-        this.description,
-        this.active,
-        this.iikoId,
-        this.jowiId,
-        this.discounts});
-
-  Products.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    outPrice = json['out_price'];
-    currency = json['currency'];
-    string = json['string'];
-    type = json['type'];
-    categories = json['categories'].cast<String>();
-    brandId = json['brand_id'];
-    rateId = json['rate_id'];
-    image = json['image'];
-    activeInMenu = json['active_in_menu'];
-    hasModifier = json['has_modifier'];
-    fromTime = json['from_time'];
-    toTime = json['to_time'];
-    offAlways = json['off_always'];
-    gallery = json['gallery'];
-    title =
-    json['title'] != null ? Description.fromJson(json['title']) : null;
-    description = json['description'] != null
-        ? Description.fromJson(json['description'])
-        : null;
-    active = json['active'];
-    iikoId = json['iiko_id'];
-    jowiId = json['jowi_id'];
-    discounts = json['discounts'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['out_price'] = outPrice;
-    data['currency'] = currency;
-    data['string'] = string;
-    data['type'] = type;
-    data['categories'] = categories;
-    data['brand_id'] = brandId;
-    data['rate_id'] = rateId;
-    data['image'] = image;
-    data['active_in_menu'] = activeInMenu;
-    data['has_modifier'] = hasModifier;
-    data['from_time'] = fromTime;
-    data['to_time'] = toTime;
-    data['off_always'] = offAlways;
-    data['gallery'] = gallery;
-    if (title != null) {
-      data['title'] = title!.toJson();
-    }
-    if (description != null) {
-      data['description'] = description!.toJson();
-    }
-    data['active'] = active;
-    data['iiko_id'] = iikoId;
-    data['jowi_id'] = jowiId;
-    data['discounts'] = discounts;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['uz'] = this.uz;
+    data['ru'] = this.ru;
+    data['en'] = this.en;
     return data;
   }
 }

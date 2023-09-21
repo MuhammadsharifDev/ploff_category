@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
         .of(context)
         .size;
     return BlocProvider(
-      create: (context) => HomeBloc()..add(GetCategoryEvent()),
+      create: (context) => HomeBloc()..add(GetCategoryEvent())..add(BannerEvent()),
       child: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) {
           return Scaffold(
@@ -50,19 +50,20 @@ class _HomePageState extends State<HomePage> {
                     height: media.height * 40 / 812,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: state.getCategoriesResponse?.categories?.length,
+                      itemCount: state.categoriesResponse?.categories?.length,
                       itemBuilder: (context, index) {
                         return Padding(
                           padding: const EdgeInsets.only(left: 13, right: 16,),
                           child: Container(
                             width: media.width * 100 / 375,
                             decoration: BoxDecoration(
-                              color: Colors.red,
+                              color: Colors.yellow,
                               borderRadius: BorderRadius.circular(8),
                             ),
-                            child: Text(
-                                state.getCategoriesResponse?.categories?[index]
-                                    .title.toString() ?? ''),
+                            child: Center(
+                              child: Text(
+                                  state.categoriesResponse?.categories?[index].name.toString()?? ''),
+                            ),
                           ),
                         );
                       },
@@ -70,12 +71,24 @@ class _HomePageState extends State<HomePage> {
                   ),
                   SizedBox(height: media.height * 16 / 812,),
                   Container(
-                    height: media.height * 230 / 812,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
+                    color: Colors.white,
+                    child: SizedBox(
+                      height: media.height*250/812,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: state.bannerResponse?.banners?.length,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: SizedBox(
+                              width: media.width*343/376,
+                              height: media.height*160/812,
+                              child: Image.network(state.bannerResponse?.banners?[index].image??'',fit: BoxFit.cover,),
+                            ),
+                          );
+                        },
+                      ),
                     ),
-                    child: Text(state.getCategoriesResponse?.categories?[0].products.toString()??''),
                   )
 
                 ],

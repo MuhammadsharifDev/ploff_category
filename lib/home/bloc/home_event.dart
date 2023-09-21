@@ -5,3 +5,7 @@ abstract class HomeEvent {}
  class GetCategoryEvent extends HomeEvent{
   GetCategoryEvent();
  }
+
+ class BannerEvent extends HomeEvent{
+ BannerEvent();
+ }

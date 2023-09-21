@@ -2,16 +2,18 @@ part of 'home_bloc.dart';
 
 @immutable
 class HomeState extends Equatable {
-  final GetCategoriesResponse? getCategoriesResponse;
+  final CategoryResponse? categoriesResponse;
+  final BannerResponse? bannerResponse;
 
-  const HomeState({this.getCategoriesResponse});
+  const HomeState({this.categoriesResponse, this.bannerResponse});
 
-  HomeState copyWith({GetCategoriesResponse? getCategoriesResponse}) {
+  HomeState copyWith(
+      {CategoryResponse? categoriesResponse, BannerResponse? bannerResponse}) {
     return HomeState(
-        getCategoriesResponse:
-            getCategoriesResponse ?? this.getCategoriesResponse);
+        categoriesResponse: categoriesResponse ?? this.categoriesResponse,
+        bannerResponse: bannerResponse ?? this.bannerResponse);
   }
 
   @override
-  List<Object?> get props => [getCategoriesResponse];
+  List<Object?> get props => [categoriesResponse, bannerResponse];
 }
