@@ -20,6 +20,7 @@ class CategoryRepository {
   );
   
   Future<GetCategoriesResponse>  getCategory()async{
+    print('boshlandiiiiiiiiiiiiiiiiiiiiiiiiiiiii');
    try{
      final response= await dio.get('https://test.customer.api.delever.uz/v2/category-with-products');
      if(response.statusCode==200 || response.statusCode==201){

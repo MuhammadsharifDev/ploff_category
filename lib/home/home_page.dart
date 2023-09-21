@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
         .of(context)
         .size;
     return BlocProvider(
-      create: (context) => HomeBloc(),
+      create: (context) => HomeBloc()..add(GetCategoryEvent()),
       child: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) {
           return Scaffold(
